@@ -24,48 +24,62 @@ var numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 var alpha = "abcdefghijklmnopqrstuvwxyz";
 
-var letters = alpha.split("")
+var letters = alpha.split("");
+// var included = [];
 
-var included = [];
+// included.push(specialCharacters);
+// included.push(numbers);
+// included.push(letters);
+// var flatIncluded = included.flat();
+// console.log(flatIncluded.length)
+// var randomIndex =  Math.floor(Math.random() * flatIncluded.length);
+// console.log(randomIndex)
 
-included.push(letters)
-console.log(letters)
-included.push(numbers)
-included.flat()
-console.log(included.length)
-
-var password = [];
 
 
 function generatePassword() {
 
-  
+  var included = [];
+
+  var PW = [];
+  console.log(PW)
 
   var pwLength = prompt("Enter a password length between 8 and 128");
 
   if (pwLength >= 8 && pwLength <= 128) {
+    console.log(pwLength)
     if (confirm("Would you like special characters?")) {
-      included.shift(specialCharacters)
+      included.push(specialCharacters);
+      console.log(included)
     }
     if (confirm("Would you like numbers?")) {
-      included.shift(numbers)
+      included.push(numbers);
+      console.log(included)
+
     }
-    if (confirm("Would you like upper case letters?")) {
-      included.shift(letters.toUpperCase)
-    }
+    // if (confirm("Would you like upper case letters?")) {
+    //   included.push(letters.toUpperCase);
+    // }
     if (confirm("Would you like lower case letters?")) {
-      included.shift(letters)
+      included.push(letters);
+      console.log(included)
+
     }
     // if (included.length === 0) {
     //   return
     // }
-    for (i = 0; i < pwLength.length; i++) {
-      var randomIndex =  Math.floor(Math.random * included.length);
-      password[i] = included[randomIndex];
+    var flatIncluded = included.flat();
+    console.log(flatIncluded)
+    for (i = 0; i < pwLength; i++) {
+      var randomIndex =  Math.floor(Math.random() * flatIncluded.length);
+      
+      PW.push(flatIncluded[randomIndex]);
+      console.log(PW);
+      console.log(i);
     }
-    console.log(password)
 
-    alert("Your secure password is " + password)
+
+    alert("Your secure password is " + PW)
   }
   else {
     return
