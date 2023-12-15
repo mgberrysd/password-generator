@@ -60,7 +60,7 @@ function generatePassword() {
       PW.push(flatIncluded[randomIndex]);
     }
 
-    var stringPW = PW.toString("");
+    var stringPW = PW.join("");
     console.log(stringPW)
     alert("Your secure password is " + stringPW)
   }
