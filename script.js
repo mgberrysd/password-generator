@@ -51,20 +51,23 @@ function generatePassword() {
       included.push(letters);
     }
     if (included.length === 0) {
+      alert("Please select at least one password parameter")
       return
     }
+
     var flatIncluded = included.flat();
+
     for (i = 0; i < pwLength; i++) {
       var randomIndex =  Math.floor(Math.random() * flatIncluded.length);
       
       PW.push(flatIncluded[randomIndex]);
     }
 
-    var stringPW = PW.join("");
-    console.log(stringPW)
-    alert("Your secure password is " + stringPW)
+    alert("Your secure password is " + PW.join(""))
+    return PW.join("")
   }
   else {
+    alert("Please enter a number between 8 and 128")
     return
   }
 }
