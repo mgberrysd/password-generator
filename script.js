@@ -23,26 +23,16 @@ var specialCharacters = sC.split("");
 var numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 var alpha = "abcdefghijklmnopqrstuvwxyz";
+var alphaU = alpha.toUpperCase();
 
 var letters = alpha.split("");
-// var included = [];
-
-// included.push(specialCharacters);
-// included.push(numbers);
-// included.push(letters);
-// var flatIncluded = included.flat();
-// console.log(flatIncluded.length)
-// var randomIndex =  Math.floor(Math.random() * flatIncluded.length);
-// console.log(randomIndex)
-
-
+var lettersUpper = alphaU.split("");
 
 function generatePassword() {
 
   var included = [];
 
   var PW = [];
-  console.log(PW)
 
   var pwLength = prompt("Enter a password length between 8 and 128");
 
@@ -50,36 +40,29 @@ function generatePassword() {
     console.log(pwLength)
     if (confirm("Would you like special characters?")) {
       included.push(specialCharacters);
-      console.log(included)
     }
     if (confirm("Would you like numbers?")) {
       included.push(numbers);
-      console.log(included)
-
     }
-    // if (confirm("Would you like upper case letters?")) {
-    //   included.push(letters.toUpperCase);
-    // }
+    if (confirm("Would you like upper case letters?")) {
+      included.push(lettersUpper);
+    }
     if (confirm("Would you like lower case letters?")) {
       included.push(letters);
-      console.log(included)
-
     }
-    // if (included.length === 0) {
-    //   return
-    // }
+    if (included.length === 0) {
+      return
+    }
     var flatIncluded = included.flat();
-    console.log(flatIncluded)
     for (i = 0; i < pwLength; i++) {
       var randomIndex =  Math.floor(Math.random() * flatIncluded.length);
       
       PW.push(flatIncluded[randomIndex]);
-      console.log(PW);
-      console.log(i);
     }
 
-
-    alert("Your secure password is " + PW)
+    var stringPW = PW.toString("");
+    console.log(stringPW)
+    alert("Your secure password is " + stringPW)
   }
   else {
     return
