@@ -9,14 +9,16 @@
 
 //  var needed
 // pwlength
-// special characters array, numbers array, letters array (should only need 1)
+// special characters array, numbers array, letters array
 // make array based on selected properties
-// for each element of password randomly select a class of property and 
+// for each element of password randomly select an included character
 
 
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
+// The following lines initalize seperate variables for each type of character
+// Had to include some array and string operators to get the arrays to function properly
 var sC = "!#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
 var specialCharacters = sC.split("");
 
@@ -30,39 +32,73 @@ var lettersUpper = alphaU.split("");
 
 function generatePassword() {
 
+  // Initialized variables for the possible included characters and the password inside the function and as empty arrays so that they reset when the function is run
   var included = [];
 
   var PW = [];
 
+  var type =[];
+
+  // Prompts user to enter a PW length, then enters into the included characters logic
+  // Checks if length meets password requirements, will return if not
   var pwLength = prompt("Enter a password length between 8 and 128");
 
   if (pwLength >= 8 && pwLength <= 128) {
-    console.log(pwLength)
-    if (confirm("Would you like special characters?")) {
+    // Prompt for special characters
+    if (confirm("Would you like special characters (&, !, ?, etc.)?")) {
+      // will push to the included array as possible character selections
       included.push(specialCharacters);
+      type.push("Special Characters");
+      alert("Password will include special characters.")
     }
-    if (confirm("Would you like numbers?")) {
+    else {
+      alert("Password will not include special characters.")
+    }
+    // Prompt for numbers
+    if (confirm("Would you like numbers (0, 1, 2, etc.)?")) {
       included.push(numbers);
+      type.push("Numbers");
+      alert("Password will include numbers.")
     }
-    if (confirm("Would you like upper case letters?")) {
+    else {
+      alert("Password will not include numbers.")
+    }
+    // Prompt for uppercase
+    if (confirm("Would you like upper case letters (A, B, C, etc.)?")) {
       included.push(lettersUpper);
+      type.push("Uppercase Letters");
+      alert("Password will include uppercase letters.")
     }
-    if (confirm("Would you like lower case letters?")) {
+    else {
+      alert("Password will not include uppercase letters.")
+    }
+    // Prompt for lower case
+    if (confirm("Would you like lower case letters (a, b, c, etc.)?")) {
       included.push(letters);
+      type.push("Lowercase Letters");
+      alert("Password will include lowercase letters.")
     }
+    else {
+      alert("Password will not include lowercase letters.")
+    }
+    // If no parameters are chosen, return
     if (included.length === 0) {
       alert("Please select at least one password parameter")
       return
     }
-
+    alert("Your password will include: " + type.join(", "))
+    // since arrays were added to an existing array
     var flatIncluded = included.flat();
 
+    // for each character of generated password, randomly select an included character and add it to the PW array
+    // uses Math.random and is not actually secure
     for (i = 0; i < pwLength; i++) {
       var randomIndex =  Math.floor(Math.random() * flatIncluded.length);
       
       PW.push(flatIncluded[randomIndex]);
     }
 
+    // displays the password as an alert and to the page
     alert("Your secure password is " + PW.join(""))
     return PW.join("")
   }
